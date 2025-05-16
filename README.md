@@ -14,7 +14,6 @@ This project is designed to extract, process, and load data related to marketing
 volka_games_test/
 ├── extract_data.py             # Handles data extraction from APIs
 ├── extract_process_load.py     # Main script to extract, process, and load data
-├── fetch_api_key.py            # Fetches API key from AWS Secrets Manager
 ├── load_data.py                # Handles database interactions
 ├── process_data.py             # Processes extracted data into database-ready format
 ├── requirements.txt            # Python dependencies
