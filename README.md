@@ -2,7 +2,7 @@
 
 
 <div align="center">
-    <img src="taonga.jpg" alt="Taonga" width="120%">
+    <img src="taonga.jpg" alt="Taonga" width="110%">
 </div>
 
 ##
