@@ -73,7 +73,7 @@ The `extract_process_load.py` script utilizes the `argparse` library to allow pa
 
 ### Example Usage:
 ```bash
-python extract_process_load.py --source_date 2025-05-01 --window 7
+python extract_process_load.py --source_date 2025-05-01 --window 7 --shift 0
 ```
 
 ### Arguments:
