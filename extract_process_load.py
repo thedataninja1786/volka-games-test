@@ -10,11 +10,13 @@ from load_data import DataLoader
 from process_data import DataProcessor
 from configs.api import SchemaConfigs
 
+
 def get_env_variable(var_name: str) -> str:
     value = os.getenv(var_name)
     if not value:
         raise ValueError(f"Environment variable '{var_name}' is not set or empty.")
     return value
+
 
 # Load environment variables
 load_dotenv()
@@ -25,7 +27,9 @@ port = get_env_variable("port")
 dbname = get_env_variable("dbname")
 
 
-def get_date_range(source_date: str, window: int, shift: int = 0, freq: str = "7D") -> List[str]:
+def get_date_range(
+    source_date: str, window: int, shift: int = 0, freq: str = "7D"
+) -> List[str]:
     # run in 7-day intervals to avoid performance issues
     source_date = pd.to_datetime(source_date)
     start_date = source_date - timedelta(days=window + shift)
@@ -33,7 +37,9 @@ def get_date_range(source_date: str, window: int, shift: int = 0, freq: str = "7
     return list(pd.date_range(start_date, end_date, freq=freq).strftime("%Y-%m-%d"))
 
 
-def process_and_load_campaign_ad_data(start_date: str, end_date: str, loader: DataLoader) -> None:
+def process_and_load_campaign_ad_data(
+    start_date: str, end_date: str, loader: DataLoader
+) -> None:
     print(f"Processing campaign-ad data: {start_date} - {end_date}")
     extractor = Extractor()
     data = extractor.get_data(period_from=start_date, period_to=end_date, lod="a")
@@ -58,7 +64,9 @@ def process_and_load_campaign_ad_data(start_date: str, end_date: str, loader: Da
     )
 
 
-def process_and_load_campaign_data(start_date: str, end_date: str, loader: DataLoader) -> None:
+def process_and_load_campaign_data(
+    start_date: str, end_date: str, loader: DataLoader
+) -> None:
     print(f"Processing campaign data: {start_date} - {end_date}")
     extractor = Extractor()
     data = extractor.get_data(period_from=start_date, period_to=end_date, lod="c")
@@ -84,7 +92,9 @@ def process_and_load_campaign_data(start_date: str, end_date: str, loader: DataL
 
 
 def run_marketing_etl(source_date: str, window: int, shift: int = 0) -> None:
-    loader = DataLoader(user=user, password=password, host=host, port=port, dbname=dbname)
+    loader = DataLoader(
+        user=user, password=password, host=host, port=port, dbname=dbname
+    )
     dates = get_date_range(source_date, window, shift)
 
     for i in range(1, len(dates)):
@@ -100,13 +110,26 @@ def run_marketing_etl(source_date: str, window: int, shift: int = 0) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Run campaign ETL job")
-    parser.add_argument("--source_date", type=str, default=pd.Timestamp.today().strftime("%Y-%m-%d"),
-                        help="Reference date for ETL (default: today)")
-    parser.add_argument("--window", type=int, default=365, help="Window size in days (default: 365)")
-    parser.add_argument("--shift", type=int, default=0, help="Shift ETL window back by N days (default: 0)")
+    parser.add_argument(
+        "--source_date",
+        type=str,
+        default=pd.Timestamp.today().strftime("%Y-%m-%d"),
+        help="Reference date for ETL (default: today)",
+    )
+    parser.add_argument(
+        "--window", type=int, default=365, help="Window size in days (default: 365)"
+    )
+    parser.add_argument(
+        "--shift",
+        type=int,
+        default=0,
+        help="Shift ETL window back by N days (default: 0)",
+    )
     args = parser.parse_args()
 
-    run_marketing_etl(source_date=args.source_date, window=args.window, shift=args.shift)
+    run_marketing_etl(
+        source_date=args.source_date, window=args.window, shift=args.shift
+    )
 
 
 if __name__ == "__main__":
