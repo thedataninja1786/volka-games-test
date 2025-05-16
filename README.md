@@ -61,13 +61,8 @@ volka_games_test/
    dbname=<your_db_name>
    ```
 
-5. **Fetch API Key**:
-   Run the `fetch_api_key.py` script to fetch the API key from AWS Secrets Manager:
-   ```bash
-   python fetch_api_key.py
-   ```
 
-6. **Set Up Database**:
+5. **Set Up Database**:
    Use the `schema.sql` file to create the required database tables in postgres
 
 ## Usage
@@ -86,9 +81,6 @@ python extract_process_load.py --source_date 2025-05-01 --window 7
 - `--window`: The number of days to include in the date range window.
 
 ## File Descriptions
-
-- **`fetch_api_key.py`**:
-  Fetches the API key from AWS Secrets Manager and saves it to `api_key.json`.
 
 - **`extract_data.py`**:
   Handles data extraction from APIs based on specified parameters.
