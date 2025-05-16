@@ -6,11 +6,13 @@ import time
 import boto3
 import os
 
+
 def get_env_variable(var_name: str) -> str:
     value = os.getenv(var_name)
     if not value:
         raise ValueError(f"Environment variable '{var_name}' is not set or empty.")
     return value
+
 
 class Extractor:
     def __init__(self) -> None:
@@ -24,7 +26,7 @@ class Extractor:
         aws_access_key_id = get_env_variable("aws_access_key_id")
         aws_secret_access_key = get_env_variable("aws_secret_access_key")
         region_name = get_env_variable("region_name")
-        
+
         session = boto3.Session(
             aws_access_key_id=aws_access_key_id,
             aws_secret_access_key=aws_secret_access_key,
@@ -37,7 +39,7 @@ class Extractor:
             response = client.get_secret_value(SecretId=secret_name)
             secret_string = json.loads(response["SecretString"])
             self._api_key = secret_string["x-api-key"]
-            
+
         except Exception as e:
             print(f"An error occurred: {e}")
             raise
@@ -50,7 +52,7 @@ class Extractor:
             "Accept": "application/json",
             "x-api-key": self._api_key,
         }
-    
+
     def get_url(self) -> str:
         """Constructs the full URL by combining the base URL and endpoint."""
 
@@ -82,12 +84,14 @@ class Extractor:
 
         for attempt in range(max_retries):
             try:
-                response = requests.get(url=url, headers=headers, params=params, timeout=10)
+                response = requests.get(
+                    url=url, headers=headers, params=params, timeout=10
+                )
                 response.raise_for_status()
                 return response.json()
             except requests.exceptions.RequestException as e:
                 if attempt < max_retries - 1:
-                    wait_time = backoff_factor * (2 ** attempt)
+                    wait_time = backoff_factor * (2**attempt)
                     print(f"Request failed (attempt {attempt + 1}/{max_retries}): {e}.")
                     print(f"Retrying in {wait_time} seconds...")
                     time.sleep(wait_time)
@@ -95,9 +99,11 @@ class Extractor:
                     print(f"Request failed after {max_retries} attempts: {e}")
                     return []
 
-    def get_data(self, period_from: str, period_to: str, lod: str = "a") -> List[Dict[str, Any]]:
-        """ Fetches and aggregates data for the specified period and level of detail (lod) across all lifedays."""
-        
+    def get_data(
+        self, period_from: str, period_to: str, lod: str = "a"
+    ) -> List[Dict[str, Any]]:
+        """Fetches and aggregates data for the specified period and level of detail (lod) across all lifedays."""
+
         data = []
         # TODO switch to asynchronous for each lifeday
         for lifeday in self.lifedays:
