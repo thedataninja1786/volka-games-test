@@ -10,14 +10,19 @@ from load_data import DataLoader
 from process_data import DataProcessor
 from configs.api import SchemaConfigs
 
+def get_env_variable(var_name: str) -> str:
+    value = os.getenv(var_name)
+    if not value:
+        raise ValueError(f"Environment variable '{var_name}' is not set or empty.")
+    return value
 
 # Load environment variables
 load_dotenv()
-user = os.getenv("user")
-password = os.getenv("password")
-host = os.getenv("host")
-port = os.getenv("port")
-dbname = os.getenv("dbname")
+user = get_env_variable("user")
+password = get_env_variable("password")
+host = get_env_variable("host")
+port = get_env_variable("port")
+dbname = get_env_variable("dbname")
 
 
 def get_date_range(source_date: str, window: int, shift: int = 0, freq: str = "7D") -> List[str]:

@@ -3,24 +3,44 @@ import json
 import requests
 from configs.api import APIConfigs as Config
 import time
+import boto3
+import os
+
+def get_env_variable(var_name: str) -> str:
+    value = os.getenv(var_name)
+    if not value:
+        raise ValueError(f"Environment variable '{var_name}' is not set or empty.")
+    return value
 
 class Extractor:
-    def __init__(self, api_key_file: str = "api_key.json") -> None:
+    def __init__(self) -> None:
         self.base_url = Config.base_url
         self.endpoint = Config.campaigns_endpoint
-        self.api_key_file = api_key_file
         self._api_key = None
         self.lifedays = Config.lifeday_periods
 
     def get_api_key(self) -> None:
-        """Reads the API key and assigns it to the `_api_key` attribute."""
+        secret_name = get_env_variable("secret_name")
+        aws_access_key_id = get_env_variable("aws_access_key_id")
+        aws_secret_access_key = get_env_variable("aws_secret_access_key")
+        region_name = get_env_variable("region_name")
+        
+        session = boto3.Session(
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=region_name,
+        )
+
+        client = session.client("secretsmanager")
 
         try:
-            with open(self.api_key_file, "r") as f:
-                key = json.load(f)
-                self._api_key = key["x-api-key"]
-        except (FileNotFoundError, KeyError, json.JSONDecodeError) as e:
-            raise RuntimeError(f"Failed to load API key: {e}")
+            response = client.get_secret_value(SecretId=secret_name)
+            secret_string = json.loads(response["SecretString"])
+            self._api_key = secret_string["x-api-key"]
+            
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            raise
 
     def get_headers(self) -> Dict[str, str]:
         if self._api_key is None:
