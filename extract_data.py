@@ -5,6 +5,10 @@ from configs.api import APIConfigs as Config
 import time
 import boto3
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def get_env_variable(var_name: str) -> str:
