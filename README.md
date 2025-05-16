@@ -79,6 +79,7 @@ python extract_process_load.py --source_date 2025-05-01 --window 7
 ### Arguments:
 - `--source_date`: The starting date for the data extraction in `YYYY-MM-DD` format.
 - `--window`: The number of days to include in the date range window.
+- `--shift`: The number of days to shift from the source date.
 
 ## File Descriptions
 
