@@ -4,7 +4,7 @@
 
 
 <div align="center">
-    <img src="taonga.jpg" alt="Taonga" width="80%">
+    <img src="taonga.jpg" alt="Taonga" width="78%">
 </div>
 
 ##
@@ -85,13 +85,13 @@ python extract_process_load.py --source_date 2025-05-01 --window 7 --shift 0
 
 ## File Descriptions
 
-- **`extract_data.py`**:
+- **`etl/extract_data.py`**:
   Handles data extraction from APIs based on specified parameters.
 
-- **`process_data.py`**:
+- **`etl/process_data.py`**:
   Processes the extracted data into a format suitable for database insertion.
 
-- **`load_data.py`**:
+- **`etl/load_data.py`**:
   Handles database interactions, including upserts and batch inserts.
 
 - **`extract_process_load.py`**:
