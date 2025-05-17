@@ -1,9 +1,10 @@
 from typing import List, Dict, Any, Tuple, Callable
+from etl.load_data import DataLoader
 from collections import defaultdict
 
 
 class DataProcessor:
-    def __init__(self, loader: Callable):
+    def __init__(self, loader: DataLoader):
         self.loader = loader
 
     def get_campaign_ids(self, data: List[Dict[str, Any]]) -> Dict[str, int]:
