@@ -1,12 +1,14 @@
-# Volka Games - Senior Data Engineer Test
+<div align="center">
+    <h1>Volka Games - Senior Data Engineer Test</h1>
+</div>
 
 
 <div align="center">
-    <img src="taonga.jpg" alt="Taonga" width="90%">
+    <img src="taonga.jpg" alt="Taonga" width="80%">
 </div>
 
 ##
-This repository extract, process, and loads data related to marketing campaigns and ads. It includes functionality for fetching API keys, extracting and processing data from a thrid-party API, and loading it into a postgres database for downstream analysis.
+This repository extract, process, and loads data related to marketing campaigns and their corresponding ads. It includes functionality for fetching API keys, extracting and processing data from a thrid-party API, and loading it into a postgres database for downstream analysis.
 
 ## Project Structure
 
