@@ -102,7 +102,7 @@ class DataProcessor:
                 campaign_ad_metrics_data.append(campaign_ad_metrics_tuple)
             except Exception as e:
                 print(f"Error processing record: {record}. Error: {e}")
-                # TODO add to a dead letter queue or to a sink for invalid records
+                # TODO add the erronous records to a dead letter sink
 
         return campaign_ad_performance_data, campaign_ad_metrics_data
 
@@ -165,6 +165,6 @@ class DataProcessor:
                 campaign_performance_metrics.append(campaign_metrics_tuple)
             except Exception as e:
                 print(f"Error processing record: {record}. Error: {e}")
-                # TODO add to a dead letter queue or to a sink for invalid records
+                # TODO add the erronous records to a dead letter sink
 
         return campaign_performance_data, campaign_performance_metrics
