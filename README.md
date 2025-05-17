@@ -2,11 +2,11 @@
 
 
 <div align="center">
-    <img src="taonga.jpg" alt="Taonga" width="110%">
+    <img src="taonga.jpg" alt="Taonga" width="90%">
 </div>
 
 ##
-This project is designed to extract, process, and load data related to marketing campaigns and ads. It includes functionality for fetching API keys, extracting and processing data from APIs, and loading it into a postgres database for downstream analysis.
+This repository extract, process, and loads data related to marketing campaigns and ads. It includes functionality for fetching API keys, extracting and processing data from a thrid-party API, and loading it into a postgres database for downstream analysis.
 
 ## Project Structure
 
