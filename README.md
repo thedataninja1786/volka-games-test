@@ -114,3 +114,7 @@ python extract_process_load.py --source_date 2025-05-01 --window 7 --shift 0
 4. **Missing Dependencies**:
    Run `pip install -r requirements.txt` to install all required dependencies.
 
+## AWS Architecure
+<div align="center">
+    <img src="aws_architecture.jpg" alt="Taonga" width="78%">
+</div>
