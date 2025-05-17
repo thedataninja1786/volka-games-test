@@ -45,7 +45,9 @@ class Extractor:
             self._api_key = secret_string["x-api-key"]
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(
+                f"Failed to retrieve the API key from AWS Secrets Manager. Error: {e}"
+            )
             raise
 
     def get_headers(self) -> Dict[str, str]:
@@ -111,7 +113,7 @@ class Extractor:
         data = []
         # TODO switch to asynchronous for each lifeday
         for lifeday in self.lifedays:
-            time.sleep(0.5)  # avoid throttling
+            time.sleep(0.5)  # avoid possible throttling
             params = self.set_params(period_from, period_to, lifeday, lod)
             response = self._request(params)
             data.extend(response)
