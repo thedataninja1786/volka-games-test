@@ -5,9 +5,9 @@ import argparse
 import pandas as pd
 from dotenv import load_dotenv
 
-from extract_data import Extractor
-from load_data import DataLoader
-from process_data import DataProcessor
+from etl.extract_data import Extractor
+from etl.load_data import DataLoader
+from etl.process_data import DataProcessor
 from configs.api import SchemaConfigs
 
 

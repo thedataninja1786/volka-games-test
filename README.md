@@ -14,15 +14,15 @@ This repository extract, process, and loads data related to marketing campaigns 
 
 ```
 volka_games_test/
-├── extract_data.py             # Handles data extraction from APIs
 ├── extract_process_load.py     # Main script to extract, process, and load data
-├── load_data.py                # Handles database interactions
-├── process_data.py             # Processes extracted data into database-ready format
 ├── requirements.txt            # Python dependencies
 ├── schema.sql                  # SQL schema for database tables
-├── configs/
-│   ├── __init__.py             # Configuration package
-│   └── api.py                  # API-related configurations
+├── configs/                    
+│   ├── api.py                  # API-related configurations
+├── etl/                        
+│   ├── extract_data.py         # Handles data extraction from APIs
+│   ├── load_data.py            # Handles database interactions
+│   ├── process_data.py         # Processes extracted data into database-ready format
 ```
 
 ## Prerequisites
@@ -99,18 +99,6 @@ python extract_process_load.py --source_date 2025-05-01 --window 7 --shift 0
 
 - **`schema.sql`**:
   Contains the SQL schema for the required database tables.
-
-## Dependencies
-
-The project uses the following Python libraries:
-
-- `boto3`
-- `botocore`
-- `psycopg2`
-- `numpy`
-- `pandas`
-- `python-dotenv`
-- `requests`
 
 ## Troubleshooting
 

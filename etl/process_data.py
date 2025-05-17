@@ -1,10 +1,9 @@
-from typing import List, Dict, Any, Tuple
-from load_data import DataLoader
+from typing import List, Dict, Any, Tuple, Callable
 from collections import defaultdict
 
 
 class DataProcessor:
-    def __init__(self, loader: DataLoader):
+    def __init__(self, loader: Callable):
         self.loader = loader
 
     def get_campaign_ids(self, data: List[Dict[str, Any]]) -> Dict[str, int]:
