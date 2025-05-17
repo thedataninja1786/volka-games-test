@@ -116,5 +116,5 @@ python extract_process_load.py --source_date 2025-05-01 --window 7 --shift 0
 
 ## AWS Architecure
 <div align="center">
-    <img src="aws_architecture.jpg">
+    <img src="aws_architecture.jpg" width="70%">
 </div>
